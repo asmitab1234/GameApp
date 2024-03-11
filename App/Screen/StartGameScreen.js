@@ -10,18 +10,20 @@ const StartGameScreen = () => {
     function resetInputHandeler() {
         setEnteredText('')
     }
+    
     function confirmHandeler() {
-        const chooseNumber = parseInt(enteredText)
-        if (isNaN(chooseNumber) || (chooseNumber <= 0) || (chooseNumber > 99)) {
+        const chooseNumber = parseInt(enteredText);
+        if (isNaN(chooseNumber) || chooseNumber <= 0 || chooseNumber > 99) {
             Alert.alert(
                 'Invalid Number',
                 'Number has to be between 1 to 99',
                 [{ text: 'Okay', style: 'destructive', onPress: resetInputHandeler }]
-            )
-            return
+            );
+        } else {
+            console.log('validEnter');
         }
-        console.log('validEnter')
     }
+    console.log('alert...',)
     return (
         <View
             style={styles.container}>
@@ -31,7 +33,9 @@ const StartGameScreen = () => {
                 keyboardType='number-pad'
                 autoCapitalize='none'
                 autoCorrect={false}
-                onChangeText={inputHandeler}
+                onChangeText={(val)=>setEnteredText(val)}
+                value={enteredText}
+
             />
             <View
                 style={styles.buttonsContainer}>

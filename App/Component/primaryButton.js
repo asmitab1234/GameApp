@@ -5,6 +5,7 @@ const primaryButton = ({ children,onPress }) => {
     // const pressableHandeler = () => {
     //     console.log('pressed')
     // }
+    console.log('onPress>>>',onPress)
     return (
         <View
             style={styles.buttonouterComponent}>
