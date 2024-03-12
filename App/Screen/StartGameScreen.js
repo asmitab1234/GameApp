@@ -2,7 +2,7 @@ import { Alert, StyleSheet, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import PrimaryButton from '../Component/primaryButton'
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onPickNumber }) => {
     const [enteredText, setEnteredText] = useState('')
     function inputHandeler() {
         setEnteredText(enteredText)
@@ -10,7 +10,7 @@ const StartGameScreen = () => {
     function resetInputHandeler() {
         setEnteredText('')
     }
-    
+
     function confirmHandeler() {
         const chooseNumber = parseInt(enteredText);
         if (isNaN(chooseNumber) || chooseNumber <= 0 || chooseNumber > 99) {
@@ -22,8 +22,9 @@ const StartGameScreen = () => {
         } else {
             console.log('validEnter');
         }
+        onPickNumber(chooseNumber)
     }
-    console.log('alert...',)
+    // console.log('alert...',)
     return (
         <View
             style={styles.container}>
@@ -33,7 +34,7 @@ const StartGameScreen = () => {
                 keyboardType='number-pad'
                 autoCapitalize='none'
                 autoCorrect={false}
-                onChangeText={(val)=>setEnteredText(val)}
+                onChangeText={(val) => setEnteredText(val)}
                 value={enteredText}
 
             />
