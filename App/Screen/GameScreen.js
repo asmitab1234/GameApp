@@ -1,20 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Title from '../Component/Title'
 
 const GameScreen = () => {
     return (
-        <View>
-            <Text>
+        <View
+            style={styles.screen}>
+            <Title>
                 Opponent's Guess
-            </Text>
-            <Text>
-                GUESS
-            </Text>
+            </Title>
+
+            {/* GUESS */}
+
             <View>
                 <Text>
                     Higher or Lower
                 </Text>
-                
+
             </View>
         </View>
     )
@@ -22,4 +24,10 @@ const GameScreen = () => {
 
 export default GameScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        padding: 24,
+    },
+
+})
