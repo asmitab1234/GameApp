@@ -4,6 +4,7 @@ import StartGameScreen from './App/Screen/StartGameScreen';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import GameScreen from './App/Screen/GameScreen';
+import Colors from './Constants/Colors';
 
 export default function App() {
   const [user, setUser] = useState()
@@ -13,11 +14,11 @@ export default function App() {
 
   let screen = <StartGameScreen onPickNumber={onPickNumberHandeler} />
   if (user) {
-    screen = <GameScreen />
+    screen = <GameScreen userNumber={user} />
   }
   return (
     <LinearGradient
-      colors={['#9C0A47', '#E09711']}
+      colors={[Colors.primary700, Colors.acent500]}
       style={styles.rootScreen}>
       <ImageBackground
         source={{ uri: 'https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?q=80&w=1971&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
@@ -25,7 +26,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-       {screen}
+        {screen}
       </ImageBackground>
     </LinearGradient>
   );
