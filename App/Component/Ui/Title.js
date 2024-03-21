@@ -7,7 +7,7 @@ const Title = ({ children }) => {
         <View>
             <Text
                 style={styles.title}>
-                Opponent's Guess
+                {children}
             </Text>
         </View>
     )

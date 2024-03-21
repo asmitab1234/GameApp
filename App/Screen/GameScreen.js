@@ -1,8 +1,10 @@
 import { Alert, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Title from '../Component/Ui/Title'
 import NumberContainer from '../Component/Game/NumberContainer'
 import PrimaryButton from '../Component/Ui/PrimaryButton'
+import Card from '../Component/Ui/Card'
+import InstructionText from '../Component/Ui/InstructionText'
 
 function generateRandomBetween(max, min, exclude) {
     const rndom = Math.floor(Math.random() * (max - min)) + min
@@ -18,7 +20,7 @@ function generateRandomBetween(max, min, exclude) {
 var minBoundary = 1.
 var maxBoundary = 100
 
-const GameScreen = ({ userNumber }) => {
+const GameScreen = ({ userNumber, onGameOver }) => {
     const initialGuess = generateRandomBetween(minBoundary, maxBoundary, userNumber)
     const [currentGuess, setCurrentGuess] = useState(initialGuess)
     function nextGuessHandeler(direction) {//direction=>'lower', 'greater'
@@ -44,12 +46,19 @@ const GameScreen = ({ userNumber }) => {
             minBoundary == currentGuess + 1
         }
         const newRndmNumber = generateRandomBetween(
-            minBoundary,
-            maxBoundary,
+            1,
+            100,
             currentGuess
         )
         setCurrentGuess(newRndmNumber)
     }
+
+    useEffect(() => {
+        if (currentGuess === userNumber) {
+            onGameOver()
+        }
+    }, [currentGuess, userNumber, onGameOver])
+
     return (
         <View
             style={styles.screen}>
@@ -59,15 +68,15 @@ const GameScreen = ({ userNumber }) => {
             <NumberContainer>{currentGuess}</NumberContainer>
             {/* GUESS */}
 
-            <View>
-                <Text>
+            <Card>
+                <InstructionText>
                     Higher or Lower ?
-                </Text>
+                </InstructionText>
                 <View>
                     <PrimaryButton onPress={nextGuessHandeler}>+</PrimaryButton>
                     <PrimaryButton onPress={nextGuessHandeler}>-</PrimaryButton>
                 </View>
-            </View>
+            </Card>
         </View>
     )
 }
