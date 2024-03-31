@@ -10,6 +10,8 @@ import GameOverScreen from './App/Screen/GameOverScreen';
 export default function App() {
   const [user, setUser] = useState()
   const [GameIsOver, setGameIsOver] = useState(true)
+  const [guessRounds, setGuessRounds] = useState(0);
+
   function onPickNumberHandeler(pickNumber) {
     setUser(pickNumber)
     setGameIsOver(false)
@@ -19,12 +21,21 @@ export default function App() {
     setGameIsOver(true)
   }
 
+  function startNewGameHandler() {
+    setUserNumber(null);
+    setGuessRounds(0);
+  }
+
   let screen = <StartGameScreen onPickNumber={onPickNumberHandeler} />
   if (user) {
     screen = <GameScreen userNumber={user} onGameOver={gameOverHandeler} />
   }
   if (GameIsOver && user) {
-    screen = <GameOverScreen />
+    screen = <GameOverScreen
+      userNumber={user}
+      roundsNumber={guessRounds}
+      onStartNewGame={startNewGameHandler}
+    />
   }
 
 

@@ -5,6 +5,7 @@ import NumberContainer from '../Component/Game/NumberContainer'
 import PrimaryButton from '../Component/Ui/PrimaryButton'
 import Card from '../Component/Ui/Card'
 import InstructionText from '../Component/Ui/InstructionText'
+import { AntDesign } from '@expo/vector-icons';
 
 function generateRandomBetween(max, min, exclude) {
     const rndom = Math.floor(Math.random() * (max - min)) + min
@@ -67,7 +68,6 @@ const GameScreen = ({ userNumber, onGameOver }) => {
             </Title>
             <NumberContainer>{currentGuess}</NumberContainer>
             {/* GUESS */}
-
             <Card>
                 <InstructionText>
                     Higher or Lower ?
@@ -77,13 +77,13 @@ const GameScreen = ({ userNumber, onGameOver }) => {
                     <View
                         style={styles.buttonContainer}>
                         <PrimaryButton onPress={nextGuessHandeler.bind(this, 'lower')}>
-                            +
+                            <AntDesign name="plus" size={17} color="#FFFFFF" />
                         </PrimaryButton>
                     </View>
                     <View
                         style={styles.buttonContainer}>
                         <PrimaryButton onPress={nextGuessHandeler.bind(this, 'greater')}>
-                            -
+                            <AntDesign name="minus" size={17} color="#FFFFFF" />
                         </PrimaryButton>
                     </View>
                 </View>
