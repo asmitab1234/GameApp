@@ -6,69 +6,59 @@ import Title from '../Component/Ui/Title'
 import Card from '../Component/Ui/Card'
 import InstructionText from '../Component/Ui/InstructionText'
 
-const StartGameScreen = ({ onPickNumber }) => {
-    const [enteredText, setEnteredText] = useState('')
-    function inputHandeler() {
-        setEnteredText(enteredText)
+function StartGameScreen({ onPickNumber }) {
+    const [enteredNumber, setEnteredNumber] = useState('');
+  
+    function numberInputHandler(enteredText) {
+      setEnteredNumber(enteredText);
     }
-    function resetInputHandeler() {
-        setEnteredText('')
+  
+    function resetInputHandler() {
+      setEnteredNumber('');
     }
-
-    function confirmHandeler() {
-        const chooseNumber = parseInt(enteredText);
-        if (isNaN(chooseNumber) || chooseNumber <= 0 || chooseNumber > 99) {
-            Alert.alert(
-                'Invalid Number',
-                'Number has to be between 1 to 99',
-                [{ text: 'Okay', style: 'destructive', onPress: resetInputHandeler }]
-            );
-        } else {
-            console.log('validEnter');
-        }
-        onPickNumber(chooseNumber)
+  
+    function confirmInputHandler() {
+      const chosenNumber = parseInt(enteredNumber);
+  
+      if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+        Alert.alert(
+          'Invalid number!',
+          'Number has to be a number between 1 and 99.',
+          [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
+        );
+        return;
+      }
+  
+      onPickNumber(chosenNumber);
     }
-    // console.log('alert...',)
     return (
         <View style={styles.rootContainer}>
-            <Title>
-                Guess My Number
-            </Title>
-            <Card>
-                <InstructionText>
-                    Enter a Number
-                </InstructionText>
-                <TextInput
-                    style={styles.numberInput}
-                    maxLength={2}
-                    keyboardType='number-pad'
-                    autoCapitalize='none'
-                    autoCorrect={false}
-                    onChangeText={(val) => setEnteredText(val)}
-                    value={enteredText}
-
-                />
-                <View
-                    style={styles.buttonsContainer}>
-                    <View
-                        style={styles.buttonContainer}>
-                        <PrimaryButton
-                            onPress={resetInputHandeler}>
-                            Reset
-                        </PrimaryButton>
-                    </View>
-                    <View
-                        style={styles.buttonContainer}>
-                        <PrimaryButton
-                            onPress={confirmHandeler}>
-                            Confirm
-                        </PrimaryButton>
-                    </View>
-                </View>
-            </Card>
-        </View>
-    )
-}
+        <Title>Guess My Number</Title>
+        <Card>
+          <InstructionText>
+            Enter a Number
+          </InstructionText>
+          <TextInput
+            style={styles.numberInput}
+            maxLength={2}
+            keyboardType="number-pad"
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={numberInputHandler}
+            value={enteredNumber}
+          />
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+            </View>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+            </View>
+          </View>
+        </Card>
+      </View>
+    );
+  }
 
 export default StartGameScreen
 

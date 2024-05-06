@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         fontSize: 20,
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop:50
     }
 })
